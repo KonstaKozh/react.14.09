@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 /.idea
 .idea
 .DS_Store
+=======
+/hw1/node_modules
+>>>>>>> 8543ee0... gitignore
