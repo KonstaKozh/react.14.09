@@ -1,50 +1,52 @@
-import React from "react";
+import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
+import { v4 as uuidv4 } from "uuid";
+import FormMessage from "./components/FormMessage";
+import Message from "./components/Message";
 
-class HelloMessage extends React.Component {
-  constructor() {
-    super();
+class HelloMessage extends Component {
+  state = {
+    messages: [
+      {
+        id: uuidv4(),
+        author: "Bot",
+        message: "Привет от бота",
+      },
+    ],
+  };
 
-    this.state = {
-      count: 0,
-      messages: [],
-    };
-
-    this.onClick = this.onClick.bind(this);
-    this.addMessage = this.addMessage.bind(this);
+  componentDidUpdate(prevProps, prevState) {
+    const { messages } = this.state;
+    if (messages.length % 2 === 0) {
+      setTimeout(() => {
+        this.addMessage({ author: "Bot", message: "привет, я бот" });
+      }, 500);
+    }
   }
 
-  onClick() {
-    const { count } = this.state;
-    this.setState({ count: count + 1 });
-  }
+  addMessage = (message) => {
+    const { messages } = this.state;
 
-  addMessage() {
-    const { messages, count } = this.state;
-    this.setState({ messages: [...messages, `pul ${count}`] });
-  }
+    this.setState({ messages: [...messages, { ...message, id: uuidv4() }] });
+  };
 
   render() {
-    const { count, messages } = this.state;
-
+    const { messages } = this.state;
     return (
       <div>
         <h1>Hello {this.props.name}</h1>
         <p>from GeekBrains</p>
-        <p>{count}</p>
-        <button onClick={this.onClick}>increment</button>
-        <button onClick={this.addMessage}>жмяк</button>
         <ul>
-          {messages.map((item, index) => (
-            <li key={index}>{item}</li>
+          {messages.map(({ id, author, message }) => (
+            <Message key={id} author={author} message={message} />
           ))}
         </ul>
+        <FormMessage />
       </div>
     );
   }
 }
-
 ReactDOM.render(
   <HelloMessage name="Taylor" />,
-  document.getElementById("hello-example")
+  document.getElementById("root")
 );
