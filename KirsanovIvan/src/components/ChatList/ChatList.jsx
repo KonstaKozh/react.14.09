@@ -11,10 +11,9 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import ChatIcon from '@material-ui/icons/Chat';
+import SettingsIcon from '@material-ui/icons/Settings';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import cn from 'classnames';
 
 const useStyles = makeStyles(theme => ({
@@ -60,19 +59,19 @@ const ChatList = () => {
         <div>
           <ListItem button>
             <ListItemIcon>
-              <DashboardIcon />
+              <ChatIcon />
             </ListItemIcon>
             <ListItemText primary="Chat 1" />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
-              <ShoppingCartIcon />
+              <ChatIcon />
             </ListItemIcon>
             <ListItemText primary="Chat 2" />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
-              <PeopleIcon />
+              <ChatIcon />
             </ListItemIcon>
             <ListItemText primary="Chat 3" />
           </ListItem>
@@ -84,13 +83,13 @@ const ChatList = () => {
           <ListSubheader inset>Saved reports</ListSubheader>
           <ListItem button>
             <ListItemIcon>
-              <AssignmentIcon />
+              <SettingsIcon />
             </ListItemIcon>
             <ListItemText primary="Settings" />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
-              <AssignmentIcon />
+              <MeetingRoomIcon />
             </ListItemIcon>
             <ListItemText primary="Log out" />
           </ListItem>

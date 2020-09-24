@@ -16,7 +16,10 @@ const styles = (theme) => ({
     marginTop: theme.spacing(10),
   },
   list: {
-    listStyleType: "none",
+    listStyle: "none",
+    padding: 0,
+    minWidth: 150,
+    margin: '0 auto',
     display: "flex",
     flexDirection: "column",
     fontFamily: ("Helvetica Neue", "Helvetica", "sans-serif"),
@@ -62,7 +65,7 @@ class HelloMessage extends Component {
         <Container maxWidth="md" className={classes.container}>
           <Typography
             component="div"
-            style={{ backgroundColor: "#cfe8fc", height: "80vh" }}
+            style={{ backgroundColor: "#cfe8fc", height: "80vh", padding: "20px 40px"}}
           >
           <ul className={classes.list}>
             {messages.map(({ id, author, message }) => (

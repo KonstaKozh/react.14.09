@@ -1,40 +1,91 @@
-import React from 'react';
+import React, {Component} from 'react';
 import cn from 'classnames';
-import { makeStyles } from '@material-ui/core';
+import {withStyles} from "@material-ui/core";
+import PropTypes from "prop-types";
 
-const useStyles = makeStyles(theme => ({
-  list: {
-    maxWidth: 255,
-    wordWrap: "break-word",
-    marginBottom: 12,
-    lineHeight: 24,
-    position:"relative",
-    padding:"10px 20px",
-    borderRadius:25,
-    // '&::before','&::after'{
-    //   content:"";
-		// position:"absolute";
-    // bottom:-2;
-    // height:20;
-    // }
-  },
-  
-
-})
-
-const Message = ({ author, message, className }) => {
-  return (
-    <li
-      className={cn('list', {
-        'author-bot': author === 'Bot',
-        author: author !== 'Bot',
-        className,
-      })}
-    >
-      <span>{`${message}`}</span>
-    </li>
-  );
-
+const styles = {
+    message: {
+      height: 40,
+      maxWidth: 255,
+      wordWrap: 'break-word',
+      marginBottom: 12,
+      lineHeight: '24px',
+      position: 'relative',
+      padding: '10px 20px',
+      borderRadius: 25,
+    },
+    
+    author_bot: {
+      background: '#E5E5EA',
+      color: 'black',
+        '&::before': {
+          content:"''",
+        position:'absolute',
+        bottom:-2,
+        height:20,
+          left: -7,
+          borderLeft: '20px solid #E5E5EA',
+          borderBottomRightRadius: '16px 14px',
+          transform: 'translate(0, -2px)',
+        },
+        '&::after': {
+          content:"''",
+        position:'absolute',
+        bottom:-2,
+        height:20,
+          left: 4,
+          width: 26,
+          background: '#cfe8fc',
+          borderBottomRightRadius: 10,
+          transform: 'translate(-30px, -2px)',
+        }
+    },
+    author: {
+      color: 'white',
+      background: '#0B93F6',
+      alignSelf: 'flex-end',
+        '&::before': {
+          content:"''",
+        position:'absolute',
+        bottom:-2,
+        height:20,
+          right: -7,
+          borderRight: '20px solid #0B93F6',
+          borderBottomLeftRadius: '16px 14px',
+          transform: 'translate(0, -2px)',
+        },
+        '&::after': {
+          content:"''",
+        position:'absolute',
+        bottom:-2,
+        height:20,
+          right: -56,
+          width: 26,
+          background: '#cfe8fc',
+          borderBottomLeftRadius: 10,
+          transform: 'translate(-30px, -2px)',
+        }
+    }
 };
 
-export default Message;
+class Message extends Component {
+    render() {
+        const {classes} = this.props;
+        const {author, message} = this.props;
+        return (
+            <li
+                className={cn(classes.message,
+                    (author === 'Bot' ? classes.author_bot : classes.author)
+                )}
+            >
+                {message}
+            </li>
+        );
+    };
+}
+
+Message.propTypes = {
+    classes: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+export default withStyles(styles)(Message);

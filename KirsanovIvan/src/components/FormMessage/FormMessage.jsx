@@ -15,15 +15,25 @@ const styles = theme => ({
 
 class FormMessage extends Component {
   state = {
-    author: '',
     message: '',
   };
 
+  sendMessage() {
+    const {addMessage} = this.props;
+    const {message} = this.state;
+
+    addMessage({
+        'author': 'user',
+        'message': message
+    });
+    this.setState({
+        message: ""
+    });
+}
+
   onSubmit = e => {
-    console.log(e);
     e.preventDefault();
-    const { addMessage } = this.props;
-    addMessage(this.state);
+    this.sendMessage();
   };
 
   onChange = ({ target }) => {
