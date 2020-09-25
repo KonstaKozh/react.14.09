@@ -3,8 +3,16 @@ import ReactDOM from 'react-dom';
 import MessageField from './components/MessageField';
 import Message from './components/Message';
 import {v4 as uuidv4} from "uuid";
-import './css/styles.css';
+import './css/index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+const listStyles = {
+  display: 'flex',
+  width: 300,
+  flexDirection: 'column',
+  padding: 16,
+  border: '1px solid #eaeeee',
+};
 
 class MessageComponent extends Component {
   state = {
@@ -36,12 +44,12 @@ class MessageComponent extends Component {
   render = () => {
     const { messages } = this.state;
     return (
-      <>
+      <ul style={listStyles}>
         {messages.map(({ id, author, message }) => (
           <Message key={id} author={author} message={message} />
         ))}
         <MessageField addMessage={this.addMessage} />
-      </>
+      </ul>
     );
   }
 }

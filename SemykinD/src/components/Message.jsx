@@ -9,11 +9,9 @@ class Message extends Component {
 
   render() {
     return (
-      <div
-      className='message'
-      style={{ alignSelf: this.props.author === 'Bot' ? 'flex-start' : 'flex-end' }}>
+      <div>
         <div> {this.props.message} </div>
-        <div className='message-sender'>{ this.props.author }</div>
+        <div>{ this.props.author }</div>
       </div>
     );
   }

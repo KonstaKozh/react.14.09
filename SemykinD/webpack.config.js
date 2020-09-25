@@ -28,7 +28,23 @@ module.exports = {
       },
       {
         test: /\.css/,
+        exclude: /\.module\.css$/,
         loader: [MiniCssExtractPlugin.loader, 'css-loader']
+      },
+      {
+        test: /\.module\.css$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              },
+              importLoaders: 1,
+            },
+          },
+        ],
       },
     ],
   },
@@ -38,6 +54,6 @@ module.exports = {
     port: 9000,
   },
   plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" }),
-  new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin()
   ],
 };
