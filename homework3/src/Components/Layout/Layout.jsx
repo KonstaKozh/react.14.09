@@ -7,10 +7,24 @@ import Message from '../Message';
 import ChatList from '../ChatList';
 
 const styles = {
-    root: {
-        display: 'flex',
-        minHeight: '100vh',
-    },
+  root: {
+    display: "flex",
+    minHeight: "100vh",
+  },
+  box: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+      alignItems: "center",
+    width: "98%"
+  },
+  chat: {
+    width: "50%",
+    boxShadow: "0 3px 5px 2px rgba(0, 0, 0, .3)",
+    backgroundColor: "#fff",
+    borderRadius: 5,
+    zIndex: 2,
+  },
 };
 
 class HelloMessage extends Component {
@@ -44,16 +58,20 @@ class HelloMessage extends Component {
         const { messages } = this.state;
 
         return (
-            <div className={classes.root}>
-                <Header />
-                <ChatList />
-                <ul className="list">
-                    {messages.map(({ id, author, message }) => (
-                        <Message key={id} author={author} message={message} />
-                    ))}
-                </ul>
-                <FormMessage addMessage={this.addMessage} />
-            </div>
+          <div className={classes.root}>
+            <Header />
+            <ChatList />
+            <Box className={ classes.box } component="span" m={1}>
+              <div className={classes.chat}>
+              <ul className="list">
+                {messages.map(({ id, author, message }) => (
+                  <Message key={id} author={author} message={message} />
+                ))}
+              </ul>
+              </div>
+              <FormMessage addMessage={this.addMessage} />
+            </Box>
+          </div>
         );
     }
 }
