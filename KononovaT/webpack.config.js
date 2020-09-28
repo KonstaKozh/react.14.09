@@ -58,9 +58,7 @@ module.exports = {
         historyApiFallback: true,
     },
 plugins: [
-    new HtmlWebpackPlugin({
-        template: './src/index.html'
-    }),
+    new HtmlWebpackPlugin({template: './src/index.html'}),
     new MiniCssExtractPlugin(),
 ],
 };
