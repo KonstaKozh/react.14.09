@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import cn from 'classnames';
-import {withStyles} from "@material-ui/core";
+import {Box, withStyles} from "@material-ui/core";
 import PropTypes from "prop-types";
 
 const styles = {
     message: {
-      height: 40,
-      maxWidth: 255,
+      maxWidth: 320,
       wordWrap: 'break-word',
       marginBottom: 12,
       lineHeight: '24px',
@@ -73,19 +72,21 @@ class Message extends Component {
         const {classes} = this.props;
         const {author, message} = this.props;
         return (
-            <li
+            <Box
                 className={cn(classes.message,
                     (author === 'Bot' ? classes.author_bot : classes.author)
                 )}
             >
                 {message}
-            </li>
+            </Box>
         );
     };
 }
 
 Message.propTypes = {
-    classes: PropTypes.objectOf(PropTypes.any).isRequired,
+  author: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
 };
+
 
 export default withStyles(styles)(Message);
