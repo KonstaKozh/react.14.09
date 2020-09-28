@@ -5,6 +5,7 @@ import FormMessage from '../FormMessage';
 import Header from '../Header';
 import Message from '../Message';
 import ChatList from '../ChatList';
+import MessageList from '../MessageList';
 
 const styles = {
   root: {
@@ -15,15 +16,15 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-      alignItems: "center",
-    width: "98%"
+    alignItems: "center",
+    width: "98%",
   },
   chat: {
-    width: "50%",
+    width: "90%",
     boxShadow: "0 3px 5px 2px rgba(0, 0, 0, .3)",
     backgroundColor: "#fff",
     borderRadius: 5,
-    zIndex: 2,
+    padding: 10,
   },
 };
 
@@ -54,22 +55,19 @@ class HelloMessage extends Component {
     };
 
     render() {
-        const { classes } = this.props;
+      const { classes } = this.props;
+      console.log(this.props);
         const { messages } = this.state;
 
         return (
           <div className={classes.root}>
             <Header />
             <ChatList />
-            <Box className={ classes.box } component="span" m={1}>
-              <div className={classes.chat}>
-              <ul className="list">
-                {messages.map(({ id, author, message }) => (
-                  <Message key={id} author={author} message={message} />
-                ))}
-              </ul>
-              </div>
+            <Box className={classes.box} component="div" m={1}>
+              <Box className={classes.chat} component="div" m={2}>
+              <MessageList messages={ messages } />
               <FormMessage addMessage={this.addMessage} />
+              </Box>
             </Box>
           </div>
         );

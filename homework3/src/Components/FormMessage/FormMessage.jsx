@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import MessageList from '../MessageList/MessageList';
 import { TextField, Button, withStyles } from '@material-ui/core';
 // import Button from "@material-ui/core/Button";
 
@@ -11,10 +12,11 @@ const styles = (theme) => ({
     padding: theme.spacing(2),
   },
   button: {
-    margin: theme.spacing(4),
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(2),
     backgroundColor: "#3f50b5",
     border: "none",
-    width: "400px",
+    width: "100%",
     borderRadius: 3,
     boxShadow: "0 3px 5px 2px rgba(0, 0, 0, .3)",
     height: 48,
@@ -32,7 +34,7 @@ class FormMessage extends Component {
         e.preventDefault();
         const { addMessage } = this.props;
         addMessage(this.state);
-        this.form.reset();
+        // this.form.reset();
     };
 
     onChange = ({ target }) => {
