@@ -1,57 +1,44 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { blue } from '@material-ui/core/colors';
+import { Box, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
-  bot: {
-    color: 'black',
-    minWidth: 150,
-    minHeight: 30,
-    background: 'blanchedalmond',
-    borderRadius: 10,
-    listStyle: 'none',
-    marginTop: '2%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+  messageClass: {
+    borderRadius: 4,
+    padding: theme.spacing(1),
+    color: theme.palette.common.white,
+    marginBottom: theme.spacing(1),
   },
-  user:{
-    color: 'black',
-    minWidth: 150,
-    minHeight: 30,
-    background: 'paleturquoise',
-    borderRadius: 10,
-    listStyle: 'none',
-    marginTop: '2%',
-    marginLeft: '180%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-
+  author: {
+    backgroundColor: theme.palette.primary.main,
+    marginLeft: 'auto',
+  },
+  bot: {
+    backgroundColor: theme.palette.primary.dark,
+    marginRight: 'auto',
+  },
 }));
-const name = (author) =>{
+
+const Message = ({ author, message }) => {
   const classes = useStyles();
-  if (author === 'Bot') return String(classes.bot);
-    else return String(classes.user);
-}
-const Message = ({ author, message, className }) => {
-  //const classes = useStyles();
+
   return (
-    <li
-      // className={cn('list', {
-      //    bot: author === 'Bot',
-      //    author: author !== 'Bot',
-      //   //className
-      // })}
-          className = { name(author) }
-  
+    <Box
+      component="li"
+      className={cn(classes.messageClass, {
+        [classes.author]: author !== 'Bot',
+        [classes.bot]: author === 'Bot',
+      })}
     >
       <span>{`${author}: ${message}`}</span>
-    </li>
+    </Box>
   );
+};
 
+Message.propTypes = {
+  author: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
 };
 
 export default Message;
