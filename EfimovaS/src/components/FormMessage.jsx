@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import styles from './FormMessage.module.css';
 
 class FormMessage extends Component {
   state = {
@@ -24,7 +25,7 @@ class FormMessage extends Component {
   render() {
     const { author, message } = this.state;
     return (
-      <form onSubmit={this.onSubmit}>
+      <form className={styles.list} onSubmit={this.onSubmit}>
         <div>
           <label>
             <span>Author: </span>
@@ -43,8 +44,8 @@ class FormMessage extends Component {
   }
 }
 
-/* FormMessage.propTypes = {
-  prop: PropTypes,
-}; */
+FormMessage.propTypes = {
+  addMessage: PropTypes.func.isRequired,
+};
 
 export default FormMessage;

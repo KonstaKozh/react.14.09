@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { v4 as uuidv4} from 'uuid';
 import Message from './components/Message';
 import FormMessage from './components/FormMessage';
+import './index.css';
 
 console.log("Hello React!");
 
@@ -39,7 +40,7 @@ class HelloMessage extends React.Component {
       return (
         <div>
           <h2>Hello {this.props.name}</h2>
-          <ul>
+          <ul className='list'> 
             {messages.map(({ id, author, message }) => (
               <Message key={id} author={author} message={message} />
             ))}
