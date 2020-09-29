@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 // import produce from 'immer';
+import { connect } from 'react-redux';
 import MessageList from '../../components/MessageList';
 import FormMessage from '../../components/FormMessage';
 import Layout from '../../components/Layout/Layout';
+import { addMessageToState } from '../../actions/chatActions';
 
 class Chats extends Component {
   state = {
@@ -72,8 +74,8 @@ class Chats extends Component {
     }));
 
     // with Immer.js
-    // this.setState(prevState =>
-    //   produce(prevState, draft => {
+    // this.setState(
+    //   produce(draft => {
     //     draft.chats[id].messageList.push(newId);
     //     draft.messages[newId] = { id: newId, author, message };
     //   }),
@@ -89,10 +91,12 @@ class Chats extends Component {
 
   render() {
     const { chats } = this.state;
+    console.log(this.props);
     return (
       <Layout chats={Object.values(chats)} addChat={this.addChat}>
         <MessageList messages={this.messages} />
         <FormMessage addMessage={this.addMessage} />
+        <button onClick={this.props.addMessage}>add message</button>
       </Layout>
     );
   }
@@ -104,4 +108,12 @@ Chats.propTypes = {
   }).isRequired,
 };
 
-export default Chats;
+const mapStateToProps = store => ({
+  chatsFromRedux: store.chats,
+});
+
+const mapDispatchToProps = {
+  addMessage: addMessageToState,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chats);
