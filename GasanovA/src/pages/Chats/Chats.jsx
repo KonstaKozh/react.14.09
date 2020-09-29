@@ -43,7 +43,7 @@ class Chats extends Component {
   componentDidUpdate(prevProps, prevState) {
     const lastMessag = this.messages;
 
-    if (lastMessag[lastMessag.length -1]?.author !== 'Bot') {
+    if (lastMessag[lastMessag.length - 1]?.author !== 'Bot') {
       setTimeout(() => {
         this.addMessage({ author: 'Bot', message: 'привет, я бот' });
       }, 500);
