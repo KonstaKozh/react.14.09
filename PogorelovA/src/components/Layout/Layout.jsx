@@ -18,7 +18,6 @@ const styles = theme => ({
 });
 
 const Layout = ({ children, classes, chats, addChat }) => {
-
   return (
     <div className={classes.root}>
       <Header />
