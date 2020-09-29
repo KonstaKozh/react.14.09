@@ -10,7 +10,7 @@ class FormMessage extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const { addMessage } = this.props;
-    console.log(this.state);
+    addMessage(this.state);
   };
 
   onChange = ({ target }) => {
@@ -43,8 +43,8 @@ class FormMessage extends Component {
   }
 }
 
-FormMessage.propTypes = {
+/* FormMessage.propTypes = {
   prop: PropTypes,
-};
+}; */
 
 export default FormMessage;
