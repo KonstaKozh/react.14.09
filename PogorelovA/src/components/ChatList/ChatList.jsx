@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Button,
   Divider,
   Drawer,
   IconButton,
@@ -42,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ChatList = () => {
+const ChatList = ({ chats, addChat }) => {
   const classes = useStyles();
 
   return (
@@ -60,17 +61,18 @@ const ChatList = () => {
       </div>
       <Divider />
       <List>
-        {mockChats.map(({ id, name }) => (
+        {chats.map(({ id, title }) => (
           <NavLink key={id} to={`/chats/${id}`} activeClassName={classes.active}>
             <ListItem button>
               <ListItemIcon>
                 <DashboardIcon />
               </ListItemIcon>
-              <ListItemText primary={name} />
+              <ListItemText primary={title} />
             </ListItem>
           </NavLink>
         ))}
       </List>
+      <Button onClick={addChat}>add chats</Button>
       <Divider className={classes.secondList} />
       <List>
         <ListSubheader inset>Saved reports</ListSubheader>

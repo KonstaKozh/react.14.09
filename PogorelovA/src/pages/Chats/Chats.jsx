@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
-import produce from 'immer';
+// import produce from 'immer';
 import MessageList from '../../components/MessageList';
 import FormMessage from '../../components/FormMessage';
 import Layout from '../../components/Layout/Layout';
@@ -31,7 +32,7 @@ class Chats extends Component {
     },
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate() {
     const lastMessages = this.messages;
 
     if (lastMessages[lastMessages.length - 1]?.author !== 'Bot') {
@@ -42,7 +43,11 @@ class Chats extends Component {
   }
 
   get messages() {
-    const { id } = this.props.match.params;
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
     const { chats, messages } = this.state;
     if (id in chats) {
       return chats[id].messageList.map(messId => messages[messId]);
@@ -51,7 +56,11 @@ class Chats extends Component {
   }
 
   addMessage = ({ author, message }) => {
-    const { id } = this.props.match.params;
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
     const newId = uuidv4();
 
     this.setState(({ chats, messages }) => ({
@@ -71,14 +80,28 @@ class Chats extends Component {
     // );
   };
 
+  addChat = () => {
+    const newId = uuidv4();
+    this.setState(({ chats }) => ({
+      chats: { ...chats, [newId]: { id: newId, title: `Чат ${newId}`, messageList: [] } },
+    }));
+  };
+
   render() {
+    const { chats } = this.state;
     return (
-      <Layout>
+      <Layout chats={Object.values(chats)} addChat={this.addChat}>
         <MessageList messages={this.messages} />
         <FormMessage addMessage={this.addMessage} />
       </Layout>
     );
   }
 }
+
+Chats.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.objectOf(PropTypes.any),
+  }).isRequired,
+};
 
 export default Chats;

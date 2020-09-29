@@ -17,11 +17,12 @@ const styles = theme => ({
   },
 });
 
-const Layout = ({ children, classes }) => {
+const Layout = ({ children, classes, chats, addChat }) => {
+
   return (
     <div className={classes.root}>
       <Header />
-      <ChatList />
+      <ChatList chats={chats} addChat={addChat} />
       <Container maxWidth="md" classes={{ root: classes.container }}>
         {children}
       </Container>
