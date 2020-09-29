@@ -14,6 +14,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   drawerPaper: {
@@ -55,44 +56,36 @@ const ChatList = () => {
       </div>
       <Divider />
       <List>
-        <div>
-          <ListItem button>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Chat 1" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <ShoppingCartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Chat 2" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <PeopleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Chat 3" />
-          </ListItem>
-        </div>
+        <ListItem button>
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>
+          <ListItemText primary="Chat 1" />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <ShoppingCartIcon />
+          </ListItemIcon>
+          <ListItemText primary="Chat 2" />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Chat 3" />
+        </ListItem>
       </List>
       <Divider className={classes.secondList} />
       <List>
-        <div>
-          <ListSubheader inset>Saved reports</ListSubheader>
+        <ListSubheader inset>Saved reports</ListSubheader>
+        <Link to="/about">
           <ListItem button>
             <ListItemIcon>
               <AssignmentIcon />
             </ListItemIcon>
-            <ListItemText primary="Settings" />
+            <ListItemText primary="About" />
           </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <AssignmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Log out" />
-          </ListItem>
-        </div>
+        </Link>
       </List>
     </Drawer>
   );

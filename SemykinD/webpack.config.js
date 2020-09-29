@@ -1,14 +1,15 @@
-const path = require("path");
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    app: "./src/index.jsx",
+    app: './src/index.jsx',
   },
   output: {
-    path: path.resolve(__dirname, "build"),
-    filename: "[name].[contenthash].js",
+    path: path.resolve(__dirname, 'build'),
+    filename: '[name].js',
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -19,17 +20,17 @@ module.exports = {
         test: /\.js(x)?$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
-            plugins: ["@babel/plugin-proposal-class-properties"],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: ['@babel/plugin-proposal-class-properties'],
           },
         },
       },
       {
         test: /\.css/,
         exclude: /\.module\.css$/,
-        loader: [MiniCssExtractPlugin.loader, 'css-loader']
+        loader: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.module\.css$/i,
@@ -49,11 +50,14 @@ module.exports = {
     ],
   },
   devServer: {
-    contentBase: path.join(__dirname, "build"),
+    contentBase: path.join(__dirname, 'build'),
     compress: true,
     port: 9000,
+    hot: true,
+    historyApiFallback: true,
   },
-  plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" }),
-    new MiniCssExtractPlugin()
+  plugins: [
+    new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new MiniCssExtractPlugin(),
   ],
 };

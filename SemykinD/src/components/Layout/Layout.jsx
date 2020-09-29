@@ -1,8 +1,6 @@
-import { v4 as uuidv4 } from 'uuid';
-import React, { Component } from 'react';
+import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import MessageField from '../MessageField';
-import Message from '../Message';
+import Container from '@material-ui/core/Container';
 import Header from '../Header';
 import ChatList from '../ChatList';
 
@@ -17,54 +15,20 @@ const styles = theme => ({
     width: '70%',
     margin: theme.spacing(8),
     padding: theme.spacing(2),
-    position: 'relative'
+    position: 'relative',
   },
 });
 
-class MessageComponent extends Component {
-  state = {
-    messages: [
-      {
-        id: uuidv4(),
-        author: 'Bot',
-        message: 'Я бот, чего ты от меня хочешь, кожаный мешок?',
-      },
-    ],
-  };
+const Layout = ({ children, classes }) => {
+  return (
+    <div className={classes.root}>
+      <Header />
+      <ChatList />
+      <Container maxWidth="md" classes={{ root: classes.messageField }}>
+        {children}
+      </Container>
+    </div>
+  );
+};
 
-  componentDidUpdate(prevProps, prevState) {
-    const { messages } = this.state;
-    if (messages[messages.length - 1].author !== 'Bot') {
-      setTimeout(() => {
-        this.addMessage({ author: 'Bot', message: 'Привет! Я бот' });
-      }, 1000);
-    }
-  }
-
-  addMessage = message => {
-    const { messages } = this.state;
-
-    this.setState({ messages: [...messages, { ...message, id: uuidv4() }] });
-  };
-
-  render = () => {
-    const {classes} = this.props;
-    const { messages } = this.state;
-    return (
-      <div className={classes.root}>
-        <Header />
-        <ChatList />
-
-        <ul className={classes.messageField}>
-          {messages.map(({ id, author, message }) => (
-            <Message key={id} author={author} message={message} />
-          ))}
-          <MessageField addMessage={this.addMessage} />
-        </ul>
-
-      </div>
-    );
-  };
-}
-
-export default withStyles(styles)(MessageComponent);
+export default withStyles(styles)(Layout);
