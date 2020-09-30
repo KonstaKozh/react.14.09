@@ -20,21 +20,21 @@ const MessageList = ({ messages }) => {
   const classes = useStyles();
 
   return (
-      <Box component="ul" className={classes.list}>
-        {messages.map(({ id, author, message }) => (
-            <Message key={id} author={author} message={message} />
-        ))}
-      </Box>
+    <Box component="ul" className={classes.list}>
+      {messages.map(({ id, author, message }) => (
+        <Message key={id} author={author} message={message} />
+      ))}
+    </Box>
   );
 };
 
 MessageList.propTypes = {
   messages: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        author: PropTypes.string,
-        message: PropTypes.string,
-      }),
+    PropTypes.shape({
+      id: PropTypes.number,
+      author: PropTypes.string,
+      message: PropTypes.string,
+    }),
   ).isRequired,
 };
 

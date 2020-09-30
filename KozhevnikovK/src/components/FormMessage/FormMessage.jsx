@@ -18,11 +18,9 @@ class FormMessage extends Component {
   };
 
   onSubmit = e => {
-    // console.log(e);
     e.preventDefault();
     const { addMessage } = this.props;
     addMessage(this.state);
-    this.setState({author: "", message: ""});
   };
 
   onChange = ({ target }) => {

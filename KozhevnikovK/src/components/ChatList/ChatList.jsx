@@ -46,44 +46,44 @@ const ChatList = () => {
   const classes = useStyles();
 
   return (
-      <Drawer
-          variant="permanent"
-          classes={{
-            paper: cn(classes.drawerPaper),
-          }}
-          open
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          {mockChats.map(({ id, name }) => (
-              <NavLink key={id} to={`/chats/${id}`} activeClassName={classes.active}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <DashboardIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={name} />
-                </ListItem>
-              </NavLink>
-          ))}
-        </List>
-        <Divider className={classes.secondList} />
-        <List>
-          <ListSubheader inset>Saved reports</ListSubheader>
-          <Link to="/about">
+    <Drawer
+      variant="permanent"
+      classes={{
+        paper: cn(classes.drawerPaper),
+      }}
+      open
+    >
+      <div className={classes.toolbarIcon}>
+        <IconButton>
+          <ChevronLeftIcon />
+        </IconButton>
+      </div>
+      <Divider />
+      <List>
+        {mockChats.map(({ id, name }) => (
+          <NavLink key={id} to={`/chats/${id}`} activeClassName={classes.active}>
             <ListItem button>
               <ListItemIcon>
-                <AssignmentIcon />
+                <DashboardIcon />
               </ListItemIcon>
-              <ListItemText primary="About" />
+              <ListItemText primary={name} />
             </ListItem>
-          </Link>
-        </List>
-      </Drawer>
+          </NavLink>
+        ))}
+      </List>
+      <Divider className={classes.secondList} />
+      <List>
+        <ListSubheader inset>Saved reports</ListSubheader>
+        <Link to="/about">
+          <ListItem button>
+            <ListItemIcon>
+              <AssignmentIcon />
+            </ListItemIcon>
+            <ListItemText primary="About" />
+          </ListItem>
+        </Link>
+      </List>
+    </Drawer>
   );
 };
 

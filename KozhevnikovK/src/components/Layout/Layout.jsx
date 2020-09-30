@@ -19,19 +19,19 @@ const styles = theme => ({
 
 const Layout = ({ children, classes }) => {
   return (
-      <div className={classes.root}>
-        <Header />
-        <ChatList />
-        <Container maxWidth="md" classes={{ root: classes.container }}>
-          {children}
-        </Container>
-      </div>
+    <div className={classes.root}>
+      <Header />
+      <ChatList />
+      <Container maxWidth="md" classes={{ root: classes.container }}>
+        {children}
+      </Container>
+    </div>
   );
 };
 
 Layout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)])
-      .isRequired,
+    .isRequired,
   classes: PropTypes.shape({
     root: PropTypes.string,
     container: PropTypes.string,
