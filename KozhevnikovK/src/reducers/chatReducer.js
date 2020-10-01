@@ -25,6 +25,8 @@ const reducer = (state = initialState, action) => {
                 ids: [...state.ids, newId]
             };
         }
+        case addMessageToString():
+            return {...state};
         default:
             return state;
     }

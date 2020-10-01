@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
-// import produce from 'immer';
+import {connect} from 'react-redux';
 import MessageList from "../../components/MessageList";
 import FormMessage from '../../components/FormMessage';
 import Layout from '../../components/Layout/Layout';
-import store from "../../store";
-import {addMessageToState} from "../../actions/chatActions";
+import {addMessage} from "../../reducers/messegesReducer";
 
 class Chats extends Component {
   state = {
@@ -96,7 +95,7 @@ class Chats extends Component {
       <Layout chats = {Object.values(chats)} addChat={this.addChat}>
         <MessageList messages={this.messages} />
         <FormMessage addMessage={this.addMessage} />
-        <button onClick={this.props.addMessage}>Add message</button>
+        <button onClick={() => this.props.addMessage()}>Add message</button>
       </Layout>
     );
   }
@@ -113,7 +112,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = {
-  addMessage: addMessageToState ,
+  addMessage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chats);
