@@ -16,6 +16,9 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import cn from 'classnames';
 import { NavLink, Link } from 'react-router-dom';
 import mockChats from './mockChats';
+import {useDispatch, useSelector} from "react-redux";
+import store from "../../store";
+import {addChatToState} from "../../actions/chatActions";
 
 const useStyles = makeStyles(theme => ({
   drawerPaper: {
@@ -44,6 +47,11 @@ const useStyles = makeStyles(theme => ({
 
 const ChatList = () => {
   const classes = useStyles();
+  const chats = useSelector(store => store.chats.byIds);
+  const dispatch = useDispatch();
+  const addChat = () => {
+    dispatch(addChatToState());
+  }
 
   return (
     <Drawer
@@ -60,7 +68,7 @@ const ChatList = () => {
       </div>
       <Divider />
       <List>
-        {mockChats.map(({ id, name }) => (
+        {Object.values(chats).map(({ id, name }) => (
           <NavLink key={id} to={`/chats/${id}`} activeClassName={classes.active}>
             <ListItem button>
               <ListItemIcon>
@@ -71,6 +79,7 @@ const ChatList = () => {
           </NavLink>
         ))}
       </List>
+      <Button onClick={addChat}>Add chat</Button>
       <Divider className={classes.secondList} />
       <List>
         <ListSubheader inset>Saved reports</ListSubheader>

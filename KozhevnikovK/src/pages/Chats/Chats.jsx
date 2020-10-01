@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import MessageList from "../../components/MessageList";
 import FormMessage from '../../components/FormMessage';
 import Layout from '../../components/Layout/Layout';
+import store from "../../store";
+import {addMessageToState} from "../../actions/chatActions";
 
 class Chats extends Component {
   state = {
@@ -80,11 +82,21 @@ class Chats extends Component {
     // );
   };
 
+  addChat = () => {
+    const newId = uuidv4();
+    this.setState(({chats}) => ({
+      chats: { ...chats, [newID]: { id: newId, title: 'Чат ${newID}', messageList: []}},
+    }));
+  };
+
   render() {
+    const {chats} = this.state;
+    console.log(this.props);
     return (
-      <Layout>
+      <Layout chats = {Object.values(chats)} addChat={this.addChat}>
         <MessageList messages={this.messages} />
         <FormMessage addMessage={this.addMessage} />
+        <button onClick={this.props.addMessage}>Add message</button>
       </Layout>
     );
   }
@@ -96,5 +108,12 @@ Chats.propTypes = {
   }).isRequired,
 }
 
+const mapStateToProps = (store) => ({
+  chatsFromRedux: store.shats,
+});
 
-export default Chats;
+const mapDispatchToProps = {
+  addMessage: addMessageToState ,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chats);
