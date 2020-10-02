@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
-import {connect} from 'react-redux';
-import MessageList from "../../components/MessageList";
+import { connect } from 'react-redux';
+import MessageList from '../../components/MessageList';
 import FormMessage from '../../components/FormMessage';
 import Layout from '../../components/Layout/Layout';
-import {addMessage} from "../../reducers/messegesReducer";
+import { addMessage } from '../../reducers/messegesReducer';
 
 class Chats extends Component {
   state = {
@@ -46,7 +46,7 @@ class Chats extends Component {
   get messages() {
     const {
       match: {
-        params: {id},
+        params: { id },
       },
     } = this.props;
     const { chats, messages } = this.state;
@@ -59,7 +59,7 @@ class Chats extends Component {
   addMessage = ({ author, message }) => {
     const {
       match: {
-        params: {id},
+        params: { id },
       },
     } = this.props;
     const newId = uuidv4();
@@ -83,16 +83,16 @@ class Chats extends Component {
 
   addChat = () => {
     const newId = uuidv4();
-    this.setState(({chats}) => ({
-      chats: { ...chats, [newID]: { id: newId, title: 'Чат ${newID}', messageList: []}},
+    this.setState(({ chats }) => ({
+      chats: { ...chats, [newID]: { id: newId, title: 'Чат ${newID}', messageList: [] } },
     }));
   };
 
   render() {
-    const {chats} = this.state;
+    const { chats } = this.state;
     console.log(this.props);
     return (
-      <Layout chats = {Object.values(chats)} addChat={this.addChat}>
+      <Layout chats={Object.values(chats)} addChat={this.addChat}>
         <MessageList messages={this.messages} />
         <FormMessage addMessage={this.addMessage} />
         <button onClick={() => this.props.addMessage()}>Add message</button>
@@ -105,9 +105,9 @@ Chats.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.objectOf(PropTypes.any),
   }).isRequired,
-}
+};
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   chatsFromRedux: store.shats,
 });
 
