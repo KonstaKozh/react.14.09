@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { ADD_CHAT } from '../actions/chatActions';
-import { addMessage } from './messagesReducer';
+import { addMessage } from './messegesReducer';
 
 const initialState = {
     byIds: {
