@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { Box, makeStyles } from '@material-ui/core';
-import {ptBR} from "@material-ui/core/locale";
 
 const useStyles = makeStyles(theme => ({
   messageClass: {
@@ -21,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
   active: {
     backgroundColor: theme.palette.primary.light,
-  }
+  },
 }));
 
 const Message = ({ author, message, isActive }) => {

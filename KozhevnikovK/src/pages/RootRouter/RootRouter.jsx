@@ -9,33 +9,34 @@ import Chats from '../Chats';
 import Home from '../Home';
 
 const RootRouter = () => {
-    const dispatch = useDispatch();
-    const isFetching = useSelector(getIsProfileFetching);
+  const dispatch = useDispatch();
+  const isFetching = useSelector(getIsProfileFetching);
 
-    useEffect(() => {
-        dispatch(asyncGetProfile());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(asyncGetProfile());
+  }, [dispatch]);
 
-    return (
-        <>
-            <Preloader open={isFetching} />
-            <Switch>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route path="/chats/:id" component={Chats} />
-                <Route path="/about">
-                    <About />
-                </Route>
-                <Route
-                    render={() => (
-                        <div>
-                            <h1>I am 404</h1>
-                        </div>
-                    )}
-                />
-            </Switch>
-        </>
-    );
+  return (
+    <>
+      <Preloader open={isFetching} />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/chats/:id" component={Chats} />
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route
+          render={() => (
+            <div>
+              <h1>I am 404</h1>
+            </div>
+          )}
+        />
+      </Switch>
+    </>
+  );
 };
+
 export default RootRouter;

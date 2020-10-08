@@ -35,33 +35,33 @@ const MessageList = ({ messages, activeMessages }) => {
   // }, [messages]);
 
   return (
-      <Box ref={listRef} component="ul" className={classes.list}>
-        {messages.length ? (
-            messages.map(({ id, author, message }) => (
-                <Message
-                    key={id}
-                    author={author}
-                    message={message}
-                    isActive={activeMessages.includes(id)}
-                />
-            ))
-        ) : (
-            <Typography>Здесь ещё нет сообщений</Typography>
-        )}
-      </Box>
+    <Box ref={listRef} component="ul" className={classes.list}>
+      {messages.length ? (
+        messages.map(({ id, author, message }) => (
+          <Message
+            key={id}
+            author={author}
+            message={message}
+            isActive={activeMessages.includes(id)}
+          />
+        ))
+      ) : (
+        <Typography>Здесь ещё нет сообщений</Typography>
+      )}
+    </Box>
   );
 };
 
 MessageList.propTypes = {
   messages: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        author: PropTypes.string,
-        message: PropTypes.string,
-      }),
+    PropTypes.shape({
+      id: PropTypes.string,
+      author: PropTypes.string,
+      message: PropTypes.string,
+    }),
   ).isRequired,
   activeMessages: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number]))
-      .isRequired,
+    .isRequired,
 };
 
 export default MessageList;
